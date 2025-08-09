@@ -117,6 +117,27 @@
     nav ul{display:none}.menu-btn{display:block}
     .nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;right:4%;top:58px;background:#fff;border:1px solid rgba(0,0,0,.12);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
   }
+/* === 最終置中補丁（貼在 </style> 之前）=== */
+
+/* 讓「三大賣點 / 電子書 / 影片 / 文章 / 購買」整組居中排列 */
+.features, .grid, .posts {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, 320px) !important; /* 固定每欄寬度 */
+  justify-content: center !important;   /* 整組置中 */
+  justify-items: center !important;     /* 每張卡片也置中 */
+  gap: 18px !important;
+  margin: 0 auto !important;
+}
+
+/* 卡片本體寬度固定，避免撐滿整行導致看起來貼左 */
+.card, .post, .feat {
+  width: 320px !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+/* 說明文字維持黑色 */
+.muted { color: #111 !important; } 
 </style>
 </head>
 <body>

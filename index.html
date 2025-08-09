@@ -8,114 +8,114 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --ink:#121212;
-      --muted:#5f6368;
-      --accent:#0e6e63;     /* 主色：墨綠 */
-      --accent-2:#b08a4a;   /* 輔色：金棕 */
+      --ink:#111;
+      --muted:#ffd84d;          /* 說明文字：亮黃色 */
+      --accent:#0e6e63;         /* 主色：墨綠 */
+      --accent-2:#b08a4a;       /* 金棕點綴 */
       --line:rgba(255,255,255,.25);
       --radius:18px;
       --shadow:0 18px 40px rgba(0,0,0,.18);
       --w:min(1140px,92vw);
-      --glass-bg:rgba(255,255,255,.78);
-      --glass-dark:rgba(255,255,255,.88);
+      --glass:rgba(255,255,255,.82);
+      --glass-strong:rgba(255,255,255,.9);
     }
     *{box-sizing:border-box}
     html,body{margin:0}
     body{
-      font-family: Inter, "Noto Serif TC","PingFang TC","Microsoft JhengHei", system-ui, sans-serif;
+      font-family: Inter,"Noto Serif TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
       color:var(--ink);
-      /* === 整頁風景背景（TODO: 換成你的圖片網址） === */  
-        background:
-  linear-gradient(rgba(10,14,16,.15), rgba(10,14,16,.35)),
-  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop')
-  center/cover fixed no-repeat;
+      /* 全頁『藍海』背景 */
+      background:
+        linear-gradient(rgba(10,14,16,.15), rgba(10,14,16,.35)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop')
+        center/cover fixed no-repeat;
     }
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     img{display:block;max-width:100%;height:auto}
-
     .wrap{width:var(--w);margin:0 auto}
+    .panel{background:var(--glass);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);backdrop-filter:saturate(140%) blur(10px)}
 
-    /* 頂部防詐提示條 */
-    .notice{backdrop-filter:saturate(160%) blur(6px); background:rgba(255,247,230,.85); border-bottom:1px solid #ffe09a; color:#6b4d00; font-size:14px}
+    /* 防詐提示條 */
+    .notice{backdrop-filter:saturate(160%) blur(6px); background:rgba(255,247,230,.9); border-bottom:1px solid #ffe09a; color:#6b4d00; font-size:14px}
     .notice .wrap{display:flex;gap:10px;align-items:center;justify-content:center;padding:10px 12px;text-align:center;flex-wrap:wrap}
     .notice b{color:#2b2b2b}
 
-    /* Header（玻璃感） */
+    /* Header */
     header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px); background:rgba(255,255,255,.45); border-bottom:1px solid var(--line)}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{font-family:"Noto Serif TC", serif;font-weight:700;letter-spacing:.6px}
+    .brand{font-family:"Noto Serif TC",serif;font-weight:700;letter-spacing:.6px}
     nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
     nav a{color:#0f1115;font-weight:600}
-    .menu-btn{display:none;border:1px solid var(--line);background:rgba(255,255,255,.85);padding:8px 12px;border-radius:10px}
+    .menu-btn{display:none;border:1px solid var(--line);background:rgba(255,255,255,.9);padding:8px 12px;border-radius:10px}
 
-    /* 玻璃面板（內容容器） */
-    .panel{
-      background:var(--glass-bg);
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter:saturate(140%) blur(10px);
+    /* HERO：書架背景（置中） */
+    .hero{
+      margin:28px auto 26px; padding:64px 26px; text-align:center;
+      position:relative; overflow:hidden;
     }
-
-    /* HERO（全置中） */
-    .hero{margin:28px auto 26px; padding:54px 26px; text-align:center}
-    .hero h1{
-      margin:0 0 10px; font-size:clamp(30px,4vw,56px);
-      line-height:1.2; letter-spacing:.4px; font-family:"Noto Serif TC", serif;
-      color:#0f1115;
+    .hero::before{
+      content:""; position:absolute; inset:0; z-index:0;
+      background:
+        linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.45)),
+        url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop')
+        center/cover no-repeat;                 /* 書架照片 */
+      filter: saturate(105%);
     }
-    .hero p{margin:8px auto 18px; color:#2b2f35; max-width:820px}
-    .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-    .badge{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.9)}
+    .hero-inner{position:relative; z-index:1}
+    .hero .panel{background:var(--glass-strong); display:inline-block; padding:28px 28px}
+    .hero h1{margin:0 0 10px; font-size:clamp(30px,4vw,56px); line-height:1.2; font-family:"Noto Serif TC",serif}
+    .hero p{margin:8px auto 18px; max-width:820px; color:var(--muted); font-size:1.4em} /* 黃色放大 */
+    .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+    .badge{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.95)}
     .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
     .btn{display:inline-block;padding:13px 18px;border-radius:12px;font-weight:700;border:1px solid transparent;transition:.2s}
     .btn-primary{background:var(--accent);color:#fff}
     .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(14,110,99,.35)}
-    .btn-ghost{background:rgba(255,255,255,.92);color:#0f1115;border-color:var(--line)}
+    .btn-ghost{background:#fff;color:#0f1115;border-color:var(--line)}
     .btn-ghost:hover{background:#fff}
 
-    /* 區塊 */
+    /* 區塊標題 & 說明字 */
     .section{margin:42px 0}
-    .section h2{font-family:"Noto Serif TC", serif;font-size:clamp(22px,2.4vw,32px);margin:0 0 12px;text-align:center}
-    .muted{color:var(--muted); text-align:center}
+    .section h2{font-family:"Noto Serif TC",serif;font-size:clamp(22px,2.4vw,32px);margin:0 0 12px;text-align:center}
+    .muted{color:var(--muted); text-align:center; font-size:1.4em; line-height:1.6}
 
-    /* 三大賣點（置中） */
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:24px 0}
-    .feat{background:var(--glass-dark);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px;text-align:center}
+    /* 賣點（置中三格、玻璃） */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:20px 0}
+    .feat{background:var(--glass-strong);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px;text-align:center}
     .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent-2);margin-right:8px;vertical-align:middle}
 
-    /* 卡片網格（置中） */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px}
-    .card{background:var(--glass-dark);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column}
-    .card .pad{padding:18px;text-align:center}
+    /* 卡片網格（全部置中） */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:16px;justify-items:center}
+    .card{background:var(--glass-strong);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;text-align:center}
+    .card .pad{padding:18px}
     .card h3{margin:6px 0 8px;font-size:20px;letter-spacing:.3px}
-    .meta{color:var(--muted);font-size:13px}
-    .cover{aspect-ratio:16/9;background:rgba(255,255,255,.66);position:relative}
+    .meta{color:#ffd84d;font-size:1.1em}
+    .cover{aspect-ratio:16/9;background:rgba(255,255,255,.66);position:relative;width:100%}
     .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.00),rgba(0,0,0,.18))}
-    .cover img{width:100%;height:100%;object-fit:cover;object-position:center} /* 圖片置中裁切 */
+    .cover img{width:100%;height:100%;object-fit:cover;object-position:center}
     .btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
 
-    /* 文章卡 */
-    .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .post{background:var(--glass-dark);border-radius:16px;box-shadow:var(--shadow);padding:18px;border:1px solid var(--line);text-align:center}
+    /* 文章卡（置中） */
+    .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;justify-items:center}
+    .post{background:var(--glass-strong);border-radius:16px;box-shadow:var(--shadow);padding:18px;border:1px solid var(--line);text-align:center}
     .post h3{margin:8px 0 8px;font-size:18px}
+    .post .meta{color:#ffd84d; font-size:1.1em}
 
-    /* FAQ 列表 */
-    .list{background:var(--glass-dark);padding:18px;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
-    .list li{margin:10px 0}
+    /* FAQ & 關於 */
+    .list{background:var(--glass-strong);padding:18px;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
+    .list li{margin:10px 0; color:#ffd84d; font-size:1.2em; text-align:center}
 
-    /* Footer（玻璃） */
+    /* Footer */
     footer{margin:56px 0 34px;color:#e7ebef}
     .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
     .foot a{color:#e7ebef}
 
     /* RWD */
-    @media (max-width:1000px){ .grid,.posts{grid-template-columns:1fr 1fr} }
+    @media (max-width:1000px){ .grid,.posts,.features{grid-template-columns:1fr 1fr} }
     @media (max-width:760px){
       nav ul{display:none}.menu-btn{display:block}
       .nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;right:4%;top:58px;background:rgba(255,255,255,.95);border:1px solid var(--line);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
-      .features{grid-template-columns:1fr}
-      .grid,.posts{grid-template-columns:1fr}
+      .grid,.posts,.features{grid-template-columns:1fr}
     }
   </style>
 </head>
@@ -145,26 +145,30 @@
     </div>
   </header>
 
-  <!-- HERO 面板（置中） -->
-  <section class="wrap panel hero">
-    <h1>把思想變成工具，把故事變成武器</h1>
-    <p>文學・哲學・歷史・股市心理學。這裡是老王的創作與課程基地——閱讀、觀看與實作並行。</p>
-    <div class="badges">
-      <div class="badge">✔ 官方網站｜HTTPS</div>
-      <div class="badge">✔ 台灣信用卡（金流加密）</div>
-      <div class="badge">✔ 付款後立即交付</div>
-    </div>
-    <div class="cta">
-      <a class="btn btn-primary" href="#buy">立即購買 / 訂閱</a>
-      <a class="btn btn-ghost" href="#videos">先看免費公開課</a>
+  <!-- HERO（書架背景 + 置中） -->
+  <section class="wrap hero panel">
+    <div class="hero-inner">
+      <div class="panel" style="display:inline-block">
+        <h1>把思想變成工具，把故事變成武器</h1>
+        <p>文學・哲學・歷史・股市心理學。這裡是老王的創作與課程基地——閱讀、觀看與實作並行。</p>
+        <div class="badges">
+          <div class="badge">✔ 官方網站｜HTTPS</div>
+          <div class="badge">✔ 台灣信用卡（金流加密）</div>
+          <div class="badge">✔ 付款後立即交付</div>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="#buy">立即購買 / 訂閱</a>
+          <a class="btn btn-ghost" href="#videos">先看免費公開課</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 三大賣點（置中三格） -->
+  <!-- 三大賣點 -->
   <section class="wrap features">
-    <div class="feat"><span class="dot"></span><b>台灣信用卡｜安全金流</b><br><span class="muted">本地金流（藍新/綠界）或 Gumroad，HTTPS 加密。</span></div>
-    <div class="feat"><span class="dot"></span><b>付款後立即交付</b><br><span class="muted">電子書即時下載；會員影片 24 小時內 Gmail 授權。</span></div>
-    <div class="feat"><span class="dot"></span><b>持續更新與售後</b><br><span class="muted">檔案含更新權；遇問題可直接來信協助處理。</span></div>
+    <div class="feat"><span class="dot"></span><b>台灣信用卡｜安全金流</b><br><span style="color:#ffd84d;font-size:1.2em">本地金流（藍新/綠界）或 Gumroad，HTTPS 加密。</span></div>
+    <div class="feat"><span class="dot"></span><b>付款後立即交付</b><br><span style="color:#ffd84d;font-size:1.2em">電子書即時下載；會員影片 24 小時內 Gmail 授權。</span></div>
+    <div class="feat"><span class="dot"></span><b>持續更新與售後</b><br><span style="color:#ffd84d;font-size:1.2em">檔案含更新權；遇問題可直接來信協助處理。</span></div>
   </section>
 
   <!-- 電子書 -->
@@ -174,14 +178,12 @@
     <div class="grid">
       <article class="card">
         <div class="cover">
-          <!-- TODO: 替換封面圖 -->
           <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="書封面示意">
         </div>
         <div class="pad">
           <h3>《老王宇宙：第一部》</h3>
-          <p class="muted">哲學小說 × 心理戰術。二十個場景，拆解信念與市場。</p>
+          <p class="meta">哲學小說 × 心理戰術。二十個場景，拆解信念與市場。</p>
           <div class="btn-row">
-            <!-- TODO: 換成金流連結 -->
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
             <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">試讀</a>
           </div>
@@ -192,7 +194,7 @@
         <div class="cover"><img src="https://images.unsplash.com/photo-1510771463146-e89e6e86560e?q=80&w=1600&auto=format&fit=crop" alt="書封面示意"></div>
         <div class="pad">
           <h3>《股市心理學：永恆規則》</h3>
-          <p class="muted">從人性回頭看 K 線；從失敗提煉紀律。</p>
+          <p class="meta">從人性回頭看 K 線；從失敗提煉紀律。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
             <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">章節</a>
@@ -204,7 +206,7 @@
         <div class="cover"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1600&auto=format&fit=crop" alt="書封面示意"></div>
         <div class="pad">
           <h3>《陽明學給創作者的 27 封信》</h3>
-          <p class="muted">知行合一、當下即道——寫給仍在路上的人。</p>
+          <p class="meta">知行合一、當下即道——寫給仍在路上的人。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
             <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">節錄</a>
@@ -221,12 +223,11 @@
     <div class="grid">
       <article class="card">
         <div class="cover">
-          <!-- TODO: 換你的 YouTube 影片 ID -->
           <iframe width="100%" height="100%" src="https://www.youtube.com/embed/VIDEO_ID_A?rel=0" title="公開課 A" frameborder="0" allowfullscreen></iframe>
         </div>
         <div class="pad">
           <h3>公開課：思辨的刀法</h3>
-          <p class="muted">十招拆盲點：從定義到反例。</p>
+          <p class="meta">十招拆盲點：從定義到反例。</p>
         </div>
       </article>
 
@@ -236,7 +237,7 @@
         </div>
         <div class="pad">
           <h3>公開課：故事的戰術</h3>
-          <p class="muted">角色動機、張力循環、情節節點。</p>
+          <p class="meta">角色動機、張力循環、情節節點。</p>
         </div>
       </article>
 
@@ -246,7 +247,7 @@
         </div>
         <div class="pad">
           <h3>會員課（示意）</h3>
-          <p class="muted">購買時請填 <b>Gmail</b> 用於授權；未授權帳號無法觀看。</p>
+          <p class="meta">購買時請填 <b>Gmail</b> 用於授權；未授權帳號無法觀看。</p>
         </div>
       </article>
     </div>
@@ -260,17 +261,17 @@
       <article class="post">
         <div class="meta">2025-08-01｜哲學</div>
         <h3><a href="#">非法即是法：一個創作者的版本</a></h3>
-        <p>把「法」當成工具，而不是枷鎖——從語言、意圖與結果重新界定。</p>
+        <p style="color:#ffd84d">把「法」當成工具，而不是枷鎖——從語言、意圖與結果重新界定。</p>
       </article>
       <article class="post">
         <div class="meta">2025-07-20｜市場</div>
         <h3><a href="#">連跌三日的主力劇本</a></h3>
-        <p>多空雙線推演：訊號、意圖、假破、真出清。</p>
+        <p style="color:#ffd84d">多空雙線推演：訊號、意圖、假破、真出清。</p>
       </article>
       <article class="post">
         <div class="meta">2025-07-05｜寫作</div>
         <h3><a href="#">人物弧線的負面力學</a></h3>
-        <p>不是加戲，而是加壓。角色的壓強越真實，讀者的情緒越可信。</p>
+        <p style="color:#ffd84d">不是加戲，而是加壓。角色的壓強越真實，讀者的情緒越可信。</p>
       </article>
     </div>
   </section>
@@ -283,9 +284,8 @@
       <article class="card">
         <div class="pad">
           <h3>安全測試商品（NT$1）</h3>
-          <p class="muted">先體驗付款流程與交付方式（10 分鐘短片/試讀）。</p>
+          <p class="meta">先體驗付款流程與交付方式（10 分鐘短片/試讀）。</p>
           <div class="btn-row">
-            <!-- TODO: 放你的 1 元測試連結 -->
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">立即測試</a>
             <a class="btn btn-ghost" href="#faq">為何要測試？</a>
           </div>
@@ -294,7 +294,7 @@
       <article class="card">
         <div class="pad">
           <h3>電子書（單本）</h3>
-          <p class="muted">PDF/EPUB 下載，含浮水印與更新權。</p>
+          <p class="meta">PDF/EPUB 下載，含浮水印與更新權。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
             <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">章節目錄</a>
@@ -304,7 +304,7 @@
       <article class="card">
         <div class="pad">
           <h3>會員影片（月／年）</h3>
-          <p class="muted">Gmail 私人授權；付款後 24 小時內開通。</p>
+          <p class="meta">Gmail 私人授權；付款後 24 小時內開通。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">訂閱</a>
             <a class="btn btn-ghost" href="#about">聯絡我</a>
@@ -328,10 +328,9 @@
   <!-- 關於 -->
   <section id="about" class="wrap section">
     <h2 class="panel" style="padding:12px 18px">關於老王</h2>
-    <div class="panel" style="padding:18px">
-      <p class="muted" style="text-align:center">
+    <div class="panel" style="padding:18px; text-align:center">
+      <p style="color:#ffd84d; font-size:1.3em">
         創作者、講師、投資心理學研究者。作品跨越文學、哲學、歷史與市場行為。合作與授課邀請：
-        <!-- TODO: 換你的信箱 -->
         <a href="mailto:yourmail@example.com">yourmail@example.com</a>
       </p>
     </div>
@@ -341,7 +340,6 @@
     <div class="foot">
       <div>© <span id="y"></span> 老王 AI 工作室</div>
       <div>社群：
-        <!-- TODO: 換你的社群 -->
         <a href="#" target="_blank" rel="noopener">YouTube</a> ｜ 
         <a href="#" target="_blank" rel="noopener">Facebook</a> ｜ 
         <a href="#" target="_blank" rel="noopener">Instagram</a>

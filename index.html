@@ -4,13 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>老王 AI 工作室｜文學・哲學・歷史・股市心理學</title>
-<meta name="description" content="老王 AI 工作室官方網站：作品、課程與付費內容入口。">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#111;
-    --muted:#ffd84d;      /* 說明字：亮黃 */
-    --accent:#0e6e63;     /* 墨綠 */
+    --accent:#0e6e63;     /* 主色：墨綠 */
     --accent-2:#b08a4a;   /* 金棕 */
     --line:rgba(255,255,255,.25);
     --radius:18px;
@@ -32,14 +30,12 @@
   }
   a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
   img{display:block;max-width:100%;height:auto}
-
   .wrap{width:var(--w);margin:0 auto}
   .panel{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);backdrop-filter:saturate(140%) blur(10px)}
 
-  /* 頂部提示 */
+  /* 顶部提示（可保留） */
   .notice{backdrop-filter:saturate(160%) blur(6px); background:rgba(255,247,230,.9); border-bottom:1px solid #ffe09a; color:#6b4d00; font-size:14px}
   .notice .wrap{display:flex;gap:10px;align-items:center;justify-content:center;padding:10px 12px;text-align:center;flex-wrap:wrap}
-  .notice b{color:#2b2b2b}
 
   /* Header */
   header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(10px); background:rgba(255,255,255,.45); border-bottom:1px solid var(--line)}
@@ -59,44 +55,39 @@
       center/cover no-repeat; /* 書架圖 */
   }
   .hero-inner{position:relative; z-index:1}
-  .hero .panel{display:inline-block;background:var(--glass-strong); padding:28px 28px}
+  .hero-box{display:inline-block;background:var(--glass-strong); padding:28px 28px; border-radius:var(--radius); box-shadow:var(--shadow)}
   .hero h1{margin:0 0 10px; font-size:clamp(30px,4vw,56px); line-height:1.2; font-family:"Noto Serif TC",serif}
-  .hero p{margin:8px auto 18px; max-width:820px; color:var(--muted); font-size:1.4em}
+  .hero p{margin:8px auto 18px; max-width:820px; color:#111; font-size:1.1em}
   .badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}
-  .badge{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.95)}
+  .badge{font-size:12px;border:1px solid rgba(0,0,0,.12);padding:6px 10px;border-radius:999px;background:#fff}
   .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
   .btn{display:inline-block;padding:13px 18px;border-radius:12px;font-weight:700;border:1px solid transparent;transition:.2s}
   .btn-primary{background:var(--accent);color:#fff}
   .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(14,110,99,.35)}
-  .btn-ghost{background:#fff;color:#0f1115;border-color:var(--line)}
+  .btn-ghost{background:#fff;color:#0f1115;border:1px solid rgba(0,0,0,.12)}
 
-  /* 區塊標題＋說明 */
+  /* 區塊標題＋說明（黑色） */
   .section{margin:42px 0}
   .section h2{font-family:"Noto Serif TC",serif;font-size:clamp(22px,2.4vw,32px);margin:0 0 12px;text-align:center}
-  .muted{color:var(--muted); text-align:center; font-size:1.4em; line-height:1.6}
+  .muted{color:#111; text-align:center; font-size:1.1em; line-height:1.7}
 
   /* ====== 置中策略（容器 + 項目）====== */
-  /* 1) 大容器：把內容置中 */
+  /* 1) 大容器：用 flex 置中所有卡片群組（不會再貼左） */
   .features, .grid, .posts{
-    display:grid;
-    justify-content:center;   /* 整體置中 */
-    justify-items:center;     /* 每個卡片也置中 */
+    display:flex !important;
+    flex-wrap:wrap;
+    justify-content:center !important;  /* 群組置中 */
     gap:18px;
     margin-top:16px;
   }
-  /* 2) 欄數：桌機三欄，平板二欄，手機一欄 */
-  .features{grid-template-columns:repeat(3, 1fr)}
-  .grid{grid-template-columns:repeat(3, minmax(260px, 1fr))}
-  .posts{grid-template-columns:repeat(3, minmax(260px, 1fr))}
-
-  /* 卡片（玻璃） */
-  .card, .post, .feat{
+  /* 2) 卡片寬度固定，確保置中效果一致 */
+  .feat, .card, .post{
     background:var(--glass-strong);
-    border:1px solid var(--line);
+    border:1px solid rgba(0,0,0,.12);
     border-radius:16px;
     box-shadow:var(--shadow);
-    text-align:center;                /* 內容置中 */
-    width:100%;
+    text-align:center;
+    width:320px;                 /* 關鍵：固定卡片寬度 */
   }
   .feat{padding:18px}
   .feat .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent-2);margin-right:8px;vertical-align:middle}
@@ -104,34 +95,27 @@
   .card{overflow:hidden}
   .card .pad{padding:18px}
   .card h3{margin:6px 0 8px; font-size:20px; letter-spacing:.3px}
-  .meta{color:var(--muted); font-size:1.2em}
+  .meta{color:#111; font-size:1em}
 
-  .cover{aspect-ratio:16/9;background:rgba(255,255,255,.66);position:relative;width:100%}
+  .cover{aspect-ratio:16/9;background:#f2f2f2;position:relative;width:100%}
   .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.00),rgba(0,0,0,.18))}
   .cover img{width:100%;height:100%;object-fit:cover;object-position:center}
 
   .btn-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-  .btn-ghost:hover{background:#fff}
 
   /* FAQ / 關於 */
-  .list{background:var(--glass-strong);padding:18px;border-radius:16px;border:1px solid var(--line);box-shadow:var(--shadow)}
-  .list li{margin:10px 0; color:var(--muted); font-size:1.2em; text-align:center}
+  .list{background:var(--glass-strong);padding:18px;border-radius:16px;border:1px solid rgba(0,0,0,.12);box-shadow:var(--shadow)}
+  .list li{margin:10px 0; color:#111; font-size:1em; text-align:center}
 
   /* Footer */
   footer{margin:56px 0 34px;color:#e7ebef}
-  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.3);padding-top:16px}
   .foot a{color:#e7ebef}
 
   /* RWD */
-  @media (max-width:1000px){
-    .features{grid-template-columns:1fr 1fr}
-    .grid{grid-template-columns:1fr 1fr}
-    .posts{grid-template-columns:1fr 1fr}
-  }
   @media (max-width:760px){
     nav ul{display:none}.menu-btn{display:block}
-    .nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;right:4%;top:58px;background:rgba(255,255,255,.95);border:1px solid var(--line);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
-    .features,.grid,.posts{grid-template-columns:1fr}
+    .nav.open ul{display:flex;flex-direction:column;gap:12px;position:absolute;right:4%;top:58px;background:#fff;border:1px solid rgba(0,0,0,.12);padding:12px;border-radius:12px;box-shadow:var(--shadow)}
   }
 </style>
 </head>
@@ -164,7 +148,7 @@
   <!-- HERO -->
   <section class="wrap hero panel">
     <div class="hero-inner">
-      <div class="panel" style="display:inline-block">
+      <div class="hero-box">
         <h1>把思想變成工具，把故事變成武器</h1>
         <p>文學・哲學・歷史・股市心理學。這裡是老王的創作與課程基地——閱讀、觀看與實作並行。</p>
         <div class="badges">
@@ -174,7 +158,7 @@
         </div>
         <div class="cta">
           <a class="btn btn-primary" href="#buy">立即購買 / 訂閱</a>
-          <a class="btn" style="background:#fff;border:1px solid var(--line);color:#0f1115" href="#videos">先看免費公開課</a>
+          <a class="btn btn-ghost" href="#videos">先看免費公開課</a>
         </div>
       </div>
     </div>
@@ -203,7 +187,7 @@
           <p class="meta">哲學小說 × 心理戰術。二十個場景，拆解信念與市場。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#" target="_blank" rel="noopener">試讀</a>
+            <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">試讀</a>
           </div>
         </div>
       </article>
@@ -214,7 +198,7 @@
           <p class="meta">從人性回頭看 K 線；從失敗提煉紀律。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#" target="_blank" rel="noopener">章節</a>
+            <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">章節</a>
           </div>
         </div>
       </article>
@@ -225,7 +209,7 @@
           <p class="meta">知行合一、當下即道——寫給仍在路上的人。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#" target="_blank" rel="noopener">節錄</a>
+            <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">節錄</a>
           </div>
         </div>
       </article>
@@ -295,7 +279,7 @@
           <p class="meta">先體驗付款流程與交付方式（10 分鐘短片/試讀）。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">立即測試</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#faq">為何要測試？</a>
+            <a class="btn btn-ghost" href="#faq">為何要測試？</a>
           </div>
         </div>
       </article>
@@ -305,7 +289,7 @@
           <p class="meta">PDF/EPUB 下載，含浮水印與更新權。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">購買</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#" target="_blank" rel="noopener">章節目錄</a>
+            <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">章節目錄</a>
           </div>
         </div>
       </article>
@@ -315,32 +299,10 @@
           <p class="meta">Gmail 私人授權；付款後 24 小時內開通。</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#" target="_blank" rel="noopener">訂閱</a>
-            <a class="btn" style="background:#fff;border:1px solid var(--line);color:var(--accent)" href="#about">聯絡我</a>
+            <a class="btn btn-ghost" href="#about">聯絡我</a>
           </div>
         </div>
       </article>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="wrap section">
-    <h2 class="panel" style="padding:12px 18px">購買前須知</h2>
-    <ul class="list">
-      <li>本網站只在 <b>newebpay.com / ecpay.com.tw / gumroad.com</b> 這些域名收款。</li>
-      <li>付款後立即顯示下載/觀看方式；若未收到，請來信處理。</li>
-      <li>會員影片採 <b>Gmail 私人授權</b>，未授權帳號無法觀看。</li>
-      <li>若遇到可疑網站或不明連結，請勿付款，並來信回報。</li>
-    </ul>
-  </section>
-
-  <!-- 關於 -->
-  <section id="about" class="wrap section">
-    <h2 class="panel" style="padding:12px 18px">關於老王</h2>
-    <div class="panel" style="padding:18px; text-align:center">
-      <p class="muted" style="font-size:1.3em">
-        創作者、講師、投資心理學研究者。作品跨越文學、哲學、歷史與市場行為。合作與授課邀請：
-        <a href="mailto:yourmail@example.com">yourmail@example.com</a>
-      </p>
     </div>
   </section>
 
